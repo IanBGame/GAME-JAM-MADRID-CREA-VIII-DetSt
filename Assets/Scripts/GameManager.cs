@@ -31,19 +31,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnRondaAplastarEnd()
+    public int GetAplastarScore()
     {
         aplastarScore = totalScore;
+        return aplastarScore;
     }
 
-    public void OnRondaPañueloEnd()
+    public int GetPañueloScore()
     {
         pañueloScore = totalScore - aplastarScore;
+        return pañueloScore;
     }
 
-    public void OnRondaRuletaEnd()
+    public int GetRuletaScore()
     {
         ruletaScore = totalScore - aplastarScore - pañueloScore;
+        return ruletaScore;
     }
 
     public void AddScoreLow()

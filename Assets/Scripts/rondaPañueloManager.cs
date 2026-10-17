@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Random;
+using Random = UnityEngine.Random;
 using TMPro;
 
 public class rondaPañueloManager : MonoBehaviour
@@ -13,12 +13,12 @@ public class rondaPañueloManager : MonoBehaviour
 
     public bool isInRound;
 
-    [SerializeField] private float minTimer = 4.0;
-    [SerializeField] private float maxTimer = 10.0;
+    [SerializeField] private float minTimer = 4;
+    [SerializeField] private float maxTimer = 10;
 
     [SerializeField] TMP_Text textoTecla;
 
-    private GameManager gameManager();
+    private GameManager gameManager;
 
     private void Update()
     {

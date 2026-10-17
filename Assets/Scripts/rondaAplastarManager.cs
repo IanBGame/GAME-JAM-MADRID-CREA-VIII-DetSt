@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Random;
+using Random = UnityEngine.Random;
 
 public class rondaAplastarManager : MonoBehaviour
 {
