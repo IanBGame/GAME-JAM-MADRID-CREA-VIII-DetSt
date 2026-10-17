@@ -12,9 +12,15 @@ public class GameManager : MonoBehaviour
     public int pañueloScore;
     public int ruletaScore;
 
+    public int scoreLowAdd;
+    public int scoreMediumAdd;
+    public int scoreHighAdd;
+    public int scoreSubtract;
+
     [SerializeField] private string rondaAplastarScene = "RondaAplastar";
     [SerializeField] private string rondaPañueloScene = "RondaPañuelo";
     [SerializeField] private string rondaRuletaScene = "RondaRuleta";
+    [SerializeField] private string rondaAguadoresScene = "RondaAguadores";
     [SerializeField] private string scoreScene = "ScoreScene";
 
     void Awake()
@@ -51,32 +57,22 @@ public class GameManager : MonoBehaviour
 
     public void AddScoreLow()
     {
-        totalScore += 5;
+        totalScore += scoreLowAdd;
     }
 
     public void AddScoreMedium()
     {
-        totalScore += 10;
+        totalScore += scoreMediumAdd;
     }
 
     public void AddScoreHigh()
     {
-        totalScore += 15;
-    }
-
-    public void AddScoreVeryHigh()
-    {
-        totalScore += 20;
-    }
-
-    public void AddScorePerfect()
-    {
-        totalScore += 25;
+        totalScore += scoreHighAdd;
     }
     
     public void SubtractScore()
     {
-        totalScore -= 10;
+        totalScore -= scoreSubtract;
     }
 
     public void GoToRondaAplastar()
@@ -92,6 +88,10 @@ public class GameManager : MonoBehaviour
     public void GoToRondaRuleta()
     {
         SceneManager.LoadScene(rondaRuletaScene);
+    }
+    public void GoToRondaAguadores()
+    {
+        SceneManager.LoadScene(rondaAguadoresScene);
     }
 
     public void GoToScoreScene()
