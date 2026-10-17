@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 574381477}
   - component: {fileID: 574381476}
   m_Layer: 5
-  m_Name: Text (TMP) (4)
+  m_Name: TotalScoreText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,10 +690,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1629231395}
-  - {fileID: 574381475}
   - {fileID: 1742946538}
   - {fileID: 1294980973}
   - {fileID: 1773676447}
+  - {fileID: 574381475}
   m_Father: {fileID: 1143000355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 1294980975}
   - component: {fileID: 1294980974}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: "Pa\xF1ueloScoreText (TMP)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -888,7 +888,7 @@ GameObject:
   - component: {fileID: 1629231397}
   - component: {fileID: 1629231396}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PuntuacionesText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1025,7 +1025,7 @@ GameObject:
   - component: {fileID: 1742946540}
   - component: {fileID: 1742946539}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: AplastarScoreText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 1773676449}
   - component: {fileID: 1773676448}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: RuletaScoreText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1332,6 +1332,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShowScore
   gameManager: {fileID: 0}
+  scoreTexts:
+  - {fileID: 1742946539}
+  - {fileID: 1294980974}
+  - {fileID: 1773676448}
+  - {fileID: 574381476}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

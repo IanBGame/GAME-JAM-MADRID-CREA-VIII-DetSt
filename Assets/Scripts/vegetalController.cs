@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class vegetalController : MonoBehaviour
+public class VegetalController : MonoBehaviour
 {
     [SerializeField] private GameObject[] vegetableSkins;
 

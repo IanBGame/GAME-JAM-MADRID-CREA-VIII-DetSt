@@ -167,7 +167,7 @@ MonoBehaviour:
   - {fileID: 2038780825}
   - {fileID: 351586159}
   - {fileID: 1684302784}
-  vegetal: {fileID: 4911386776512046562, guid: 958157c0f7443204c962ddcb3cf93017, type: 3}
+  vegetalPrefab: {fileID: 4911386776512046562, guid: 958157c0f7443204c962ddcb3cf93017, type: 3}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
