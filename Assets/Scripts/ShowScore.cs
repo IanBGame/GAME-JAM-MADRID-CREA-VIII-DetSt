@@ -9,6 +9,7 @@ public class ShowScore : MonoBehaviour
     private int totalScore;
 
     [SerializeField] private GameManager gameManager;
+    //gameManager = GameObject.Find("GameManager");
 
     [SerializeField] private TMP_Text[] scoreTexts;
 
