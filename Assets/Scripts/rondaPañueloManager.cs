@@ -13,14 +13,16 @@ public class rondaPañueloManager : MonoBehaviour
 
     public bool isInRound;
 
-    [SerializeField] private float minTimer = 4;
-    [SerializeField] private float maxTimer = 10;
+    [Header("¡¡¡EL VALOR SE REDUCE POR 50 CADA SEGUNDO!!!")]
+
+    [SerializeField] private float minTimer = 200;
+    [SerializeField] private float maxTimer = 500;
 
     [SerializeField] TMP_Text textoTecla;
 
     private GameManager gameManager;
 
-    private void Update()
+    private void FixedUpdate() //ESTO CORRE 50 VECES POR SEGUNDO O CADA 0.02 SEGUNDOS PARA QUE AJUSTEIS LOS VALORES RESPECTIVAMENTE PORFA
     {
         if(isInRound)
         {
@@ -61,6 +63,16 @@ public class rondaPañueloManager : MonoBehaviour
         {
             textoTecla.text = "";
         }
+    }
+
+    private void HasHitInputRight()
+    {
+        gameManager.AddScoreMedium();
+    }
+
+    private void HasHitInputWrong()
+    {
+        gameManager.SubtractScore();
     }
 
 }

@@ -18,17 +18,18 @@ public class rondaAplastarManager : MonoBehaviour
 
     private void SpawnVegetal()
     {
-        //for(int i = 0; vegetalSpawnPoints.GetSize() > i; i++)
-        //{
-        //    GameObject vegetalSpawneado = Instantiate(vegetalPrefab, spawnPoint.position);
-        //    if(i + 1 == numeroVegetalMalo)
-        //    {
-        //        vegetalSpawneado.GetComponent<VegetalController>.isBad = true;
-        //    }
-        //    else
-        //    {
-        //        vegetalSpawneado.GetComponent<VegetalController>.isBad = false;
-        //    }
-        //}
+        for (int i = 0; vegetalSpawnPoints.Length > i; i++)
+        {
+           //GameObject vegetalSpawneado = Instantiate(vegetalPrefab, vegetalSpawnPoints.transform.position);
+           //VegetalController vegetalController = vegetalSpawneado.GetComponent<VegetalController>();
+            if (i + 1 == numeroVegetalMalo)
+            {
+                //vegetalController.isBad = true;
+            }
+            else
+            {
+                //vegetalController.isBad = false;
+            }
+        }
     }
 }

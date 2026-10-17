@@ -73,6 +73,11 @@ public class GameManager : MonoBehaviour
     {
         totalScore += 25;
     }
+    
+    public void SubtractScore()
+    {
+        totalScore -= 10;
+    }
 
     public void GoToRondaAplastar()
     {

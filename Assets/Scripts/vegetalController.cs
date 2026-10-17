@@ -12,7 +12,7 @@ public class VegetalController : MonoBehaviour
     {
         if(!isBad)
         {
-
+            
         }
         else
         {
