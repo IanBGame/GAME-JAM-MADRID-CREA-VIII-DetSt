@@ -20,15 +20,15 @@ public class rondaAplastarManager : MonoBehaviour
     {
         for (int i = 0; vegetalSpawnPoints.Length > i; i++)
         {
-           //GameObject vegetalSpawneado = Instantiate(vegetalPrefab, vegetalSpawnPoints.transform.position);
-           //VegetalController vegetalController = vegetalSpawneado.GetComponent<VegetalController>();
+            GameObject vegetalSpawneado = Instantiate(vegetalPrefab,vegetalSpawnPoints[i].position,vegetalSpawnPoints[i].rotation);
+            VegetalController vegetalController = vegetalSpawneado.GetComponent<VegetalController>();
             if (i + 1 == numeroVegetalMalo)
             {
-                //vegetalController.isBad = true;
+                vegetalController.isBad = true;
             }
             else
             {
-                //vegetalController.isBad = false;
+                vegetalController.isBad = false;
             }
         }
     }

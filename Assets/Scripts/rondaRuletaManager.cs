@@ -6,7 +6,9 @@ public class rondaRuletaManager : MonoBehaviour
 
     [SerializeField] private int rouletteTimer;
 
-    [SerializeField] private float rouletteRotation = 35.0f;
+    [SerializeField] private float rouletteRotation = 180.0f;
+
+    [SerializeField] private int numberOfSections = 8;
 
     private bool isSpinning;
 
@@ -16,7 +18,7 @@ public class rondaRuletaManager : MonoBehaviour
     {
         if(isSpinning == true)
         {
-            roulette.transform.Rotate(rouletteRotation, 0.0f, 0.0f, Space.Self);
+            roulette.transform.Rotate(0.0f, 0.0f, rouletteRotation * Time.deltaTime);
         }
     }
 
@@ -29,14 +31,19 @@ public class rondaRuletaManager : MonoBehaviour
     {
         //Alomejor hacer que no pare repentinamente y tarde un poco?
         isSpinning = false;
+
+        float stopRotationvalue = roulette.transform.eulerAngles.z;
+
+        RouletteValueCheck();
     }
 
     private void RouletteValueCheck()
     {
-        /*
-         *PONER IF CON LA ROTACION DE CADA COSA Y APLICAR PUNTOS RESPECTIVAMENTE. 
-         *
-         */
+        float rotation = roulette.transform.eulerAngles.z;
+
+        float sectionSize = 360f / numberOfSections;
+
+        int section = Mathf.FloorToInt(rotation /45f);
     }
 
 
