@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int totalScore;
 
     public int aplastarScore;
-    public int pañueloScore;
+    public int panueloScore;
     public int ruletaScore;
 
     public int scoreLowAdd;
@@ -18,10 +18,12 @@ public class GameManager : MonoBehaviour
     public int scoreSubtract;
 
     [SerializeField] private string rondaAplastarScene = "RondaAplastar";
-    [SerializeField] private string rondaPañueloScene = "RondaPañuelo";
+    [SerializeField] private string rondaPanueloScene = "RondaPanuelo";
     [SerializeField] private string rondaRuletaScene = "RondaRuleta";
     [SerializeField] private string rondaAguadoresScene = "RondaAguadores";
     [SerializeField] private string scoreScene = "ScoreScene";
+
+    [SerializeField] private LocalLeaderboard leaderboard; //Necesario para guardar el score en el leaderboard al finalizar la partida
 
     void Awake()
     {
@@ -43,15 +45,15 @@ public class GameManager : MonoBehaviour
         return aplastarScore;
     }
 
-    public int GetPañueloScore()
+    public int GetPanueloScore()
     {
-        pañueloScore = totalScore - aplastarScore;
-        return pañueloScore;
+        panueloScore = totalScore - aplastarScore;
+        return panueloScore;
     }
 
     public int GetRuletaScore()
     {
-        ruletaScore = totalScore - aplastarScore - pañueloScore;
+        ruletaScore = totalScore - aplastarScore - panueloScore;
         return ruletaScore;
     }
 
@@ -80,9 +82,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(rondaAplastarScene);
     }
 
-    public void GoToRondaPañuelo()
+    public void GoToRondaPanuelo()
     {
-        SceneManager.LoadScene(rondaPañueloScene);
+        SceneManager.LoadScene(rondaPanueloScene);
     }
 
     public void GoToRondaRuleta()
@@ -97,5 +99,6 @@ public class GameManager : MonoBehaviour
     public void GoToScoreScene()
     {
         SceneManager.LoadScene(scoreScene);
+        leaderboard.AddEntry("Implementar hueco para nombre", totalScore);
     }
 }

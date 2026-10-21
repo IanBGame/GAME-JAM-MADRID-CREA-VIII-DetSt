@@ -4,7 +4,7 @@ using TMPro;
 public class ShowScore : MonoBehaviour
 {
     private int aplastarScore;
-    private int pañueloScore;
+    private int panueloScore;
     private int ruletaScore;
     private int totalScore;
 
@@ -22,17 +22,17 @@ public class ShowScore : MonoBehaviour
     private void SetScores()
     {
         aplastarScore = gameManager.GetAplastarScore();
-        pañueloScore = gameManager.GetPañueloScore();
+        panueloScore = gameManager.GetPanueloScore();
         ruletaScore = gameManager.GetRuletaScore();
         totalScore = gameManager.totalScore;
     }
 
     private void SetTexts()
     {
-        scoreTexts[0].text = "Puntuación de la primera ronda: " + aplastarScore;
-        scoreTexts[0].text = "Puntuación de la segunda ronda: " + pañueloScore;
-        scoreTexts[0].text = "Puntuación de la primera ronda: " + ruletaScore;
-        scoreTexts[0].text = "Puntuación de la primera ronda: " + totalScore;
+        scoreTexts[0].text = "Puntuacion de la primera ronda: " + aplastarScore;
+        scoreTexts[0].text = "Puntuacion de la segunda ronda: " + panueloScore;
+        scoreTexts[0].text = "Puntuacion de la primera ronda: " + ruletaScore;
+        scoreTexts[0].text = "Puntuacion de la primera ronda: " + totalScore;
     }
 
 }
