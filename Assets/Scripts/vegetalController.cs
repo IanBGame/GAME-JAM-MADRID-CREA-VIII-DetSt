@@ -10,6 +10,19 @@ public class VegetalController : MonoBehaviour
     private int vegetableType;
     public bool isBad;
 
+    private rondaAplastarManager manager;
+
+    public void Initialize(bool bad, rondaAplastarManager managerRef)
+    {
+        isBad = bad;
+        manager = managerRef;
+    }
+
+    private void OnMouseDown()
+    {
+        manager.VegetalSeleccionado(isBad);
+    }
+
     private void Awake()
     {
         vegetableType = Random.Range(1, 4);

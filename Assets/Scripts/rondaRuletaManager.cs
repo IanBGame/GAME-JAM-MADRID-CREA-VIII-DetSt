@@ -51,5 +51,16 @@ public class rondaRuletaManager : MonoBehaviour
         int section = Mathf.FloorToInt(rotation /45f);
     }
 
+    public void RouletteButtonHit()
+    {
+        if(isSpinning)
+        {
+            StopRoulette();
+        }
+        else
+        {
+            RotateRoulette();
+        }
+    }
 
 }
