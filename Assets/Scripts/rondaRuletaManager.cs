@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class rondaRuletaManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class rondaRuletaManager : MonoBehaviour
     [SerializeField] private float rouletteRotation = 180.0f;
 
     [SerializeField] private int numberOfSections = 8;
+
+    [SerializeField] private TextMeshProUGUI buttonText;
 
     private bool isSpinning;
 
@@ -25,6 +28,7 @@ public class rondaRuletaManager : MonoBehaviour
     private void RotateRoulette()
     {
         isSpinning = true;
+        buttonText.text = "PARAR";
     }
 
     private void StopRoulette()
@@ -35,6 +39,7 @@ public class rondaRuletaManager : MonoBehaviour
         float stopRotationvalue = roulette.transform.eulerAngles.z;
 
         RouletteValueCheck();
+        buttonText.text = "GIRAR";
     }
 
     private void RouletteValueCheck()
