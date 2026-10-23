@@ -1,7 +1,8 @@
+using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
-using TMPro;
 
 public class rondaPañueloManager : MonoBehaviour
 {
@@ -10,25 +11,56 @@ public class rondaPañueloManager : MonoBehaviour
     private int currentScore;
 
     private float pressedTimer;
+    private float roundTimer;
 
     public bool isInRound;
 
-    [Header("¡¡¡EL VALOR SE REDUCE POR 50 CADA SEGUNDO!!!")]
+    [SerializeField] private float minTimer = 4f;
+    [SerializeField] private float maxTimer = 10f;
 
-    [SerializeField] private float minTimer = 200;
-    [SerializeField] private float maxTimer = 500;
+    [SerializeField] private float roundDuration = 30f;
 
     [SerializeField] TMP_Text textoTecla;
 
     private GameManager gameManager;
 
-    private void FixedUpdate() //ESTO CORRE 50 VECES POR SEGUNDO O CADA 0.02 SEGUNDOS PARA QUE AJUSTEIS LOS VALORES RESPECTIVAMENTE PORFA
+    private void Start()
     {
-        if(isInRound)
+        gameManager = FindFirstObjectByType<GameManager>();
+
+        StartRound();
+    }
+
+    private void Update()
+    {
+        if (!isInRound)
+            return;
+
+        pressedTimer -= Time.deltaTime;
+        roundTimer -= Time.deltaTime;
+
+        if (roundTimer <= 0)
         {
-            pressedTimer--;
+            EndRound();
+            return;
         }
-        
+
+        if (pressedTimer <= 0)
+        {
+            RandomizeLetter();
+            SetLetterText();
+        }
+
+        CheckInput();
+    }
+
+    private void StartRound()
+    {
+        isInRound = true;
+        roundTimer = roundDuration;
+
+        RandomizeLetter();
+        SetLetterText();
     }
 
     private void RandomizeLetter()
@@ -64,6 +96,47 @@ public class rondaPañueloManager : MonoBehaviour
             textoTecla.text = "";
         }
     }
+    
+    private void CheckInput()
+    {
+        pressedNumber = 0;
+
+        Keyboard keyboard = Keyboard.current;
+
+        if(keyboard != null)
+        {
+            return;
+        }
+
+        if (keyboard.dKey.wasPressedThisFrame)
+        {
+            pressedNumber = 1;
+        }
+        else if (keyboard.fKey.wasPressedThisFrame)
+        {
+            pressedNumber = 2;
+        }
+        else if (keyboard.jKey.wasPressedThisFrame)
+        {
+            pressedNumber = 3;
+        }
+        else if (keyboard.kKey.wasPressedThisFrame)
+        {
+            pressedNumber = 4;
+        }
+
+        if(pressedNumber != 0)
+        {
+            if(pressedNumber == letterNumber)
+            {
+                HasHitInputRight();
+            }
+            else
+            {
+                HasHitInputWrong();
+            }
+        }
+    }
 
     private void HasHitInputRight()
     {
@@ -73,6 +146,13 @@ public class rondaPañueloManager : MonoBehaviour
     private void HasHitInputWrong()
     {
         gameManager.SubtractScore();
+    }
+
+    private void EndRound()
+    {
+        isInRound = false;
+
+        SetLetterText();
     }
 
 }
