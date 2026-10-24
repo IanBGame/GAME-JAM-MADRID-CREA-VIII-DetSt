@@ -10,6 +10,11 @@ public class LeaderboardUI : MonoBehaviour
 
     private List<GameObject> activeRows = new List<GameObject>();
 
+    private void Start()
+    {
+        UpdateLeaderboardVisuals();
+    }
+
     // Llamar al volver al menu, donde esta el leaderboard
     public void UpdateLeaderboardVisuals()
     {

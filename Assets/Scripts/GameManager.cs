@@ -42,6 +42,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int GetScore()
+    {
+        return totalScore;
+    }
+
     public int GetAplastarScore()
     {
         aplastarScore = totalScore;
