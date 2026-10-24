@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour
 {
     [Header("Interfaz del Minijuego")]
     [SerializeField] private GameObject burbuja;
+    [SerializeField] private GameObject objetoReglas;
 
     [Header("Sprites Ian")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -16,8 +17,8 @@ public class CanvasManager : MonoBehaviour
 
     [Header("Configuración de Fila y Spawner")]
     [SerializeField] private List<GameObject> prefabsPersonajes; 
-    [SerializeField] private Transform puntoSpawnAtras; // Donde aparecen los nuevos al fondo de la fila
-    [SerializeField] private Transform[] puntosFila;    // [0] = Fondo -> [último] = Frente (Llegada)
+    [SerializeField] private Transform puntoSpawnAtras; 
+    [SerializeField] private Transform[] puntosFila;    
     [SerializeField] private Transform puntoSalida;
     
     private bool esperandoQueLlegueAlPunto = false;
@@ -36,16 +37,23 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private float duracionRonda = 30f; 
     private float tiempoRestante;
     private bool rondaActiva = false;
+    private bool juegoIniciado = false; 
 
     void Start() 
     {
         tiempoRestante = duracionRonda;
-        rondaActiva = true;
+        rondaActiva = false;
+        juegoIniciado = false;
         Ocultar();
 
         if (textoTemporizador != null) textoTemporizador.text = duracionRonda.ToString() + "s";
         
         LlenarFilaInicial();
+        
+        if (objetoReglas != null)
+        {
+            StartCoroutine(RutinaQuitarReglas(5.0f));
+        }
     }
 
     void Mostrar() { if (burbuja != null) burbuja.SetActive(true); }
@@ -61,7 +69,6 @@ public class CanvasManager : MonoBehaviour
 
     void SpawnearPersonajeEnFila()
     {
-        if (!rondaActiva) return;
         if (prefabsPersonajes.Count == 0) return;
 
         int indexAleatorio = Random.Range(0, prefabsPersonajes.Count);
@@ -72,7 +79,6 @@ public class CanvasManager : MonoBehaviour
         nuevoObjeto.transform.position = posicionActual;
         
         personajesEnFila.Insert(0, nuevoObjeto);
-        
         ActualizarPosicionesFila();
         esperandoQueLlegueAlPunto = true;
     }
@@ -94,6 +100,8 @@ public class CanvasManager : MonoBehaviour
 
     void VerificarLlegadaAlFrente()
     {
+        if (!juegoIniciado || rondaActiva) return;
+
         personajeActivoParaFrente = true;
         Mostrar();
         startRound(keysList);
@@ -102,7 +110,7 @@ public class CanvasManager : MonoBehaviour
 
     public void startRound(GameObject[] keysList) 
     {
-        if (spriteRenderer != null) {spriteRenderer.sprite = ianNormal;}
+        if (spriteRenderer != null) { spriteRenderer.sprite = ianNormal; }
         indiceActual = 0; 
         secuenciaCorrecta = new int[keysList.Length];
 
@@ -137,6 +145,39 @@ public class CanvasManager : MonoBehaviour
 
     void Update()
     {
+        // 1. Detectar UNA SOLA VEZ la desaparición del objeto de reglas
+        if (!juegoIniciado)
+        {
+            if (objetoReglas == null || !objetoReglas.activeInHierarchy)
+            {
+                juegoIniciado = true;
+                Debug.Log("El objeto de reglas ha desaparecido. ¡Comienza el juego oficial!");
+
+                // Si un personaje ya llegó al frente mientras leías las reglas, arranca la ronda ahora
+                int indiceFrente = puntosFila.Length - 1;
+                if (personajesEnFila.Count > indiceFrente)
+                {
+                    GameObject personajeAlFrente = personajesEnFila[indiceFrente];
+                    Transform puntoDestinoFinal = puntosFila[indiceFrente];
+                    if (personajeAlFrente != null && puntoDestinoFinal != null)
+                    {
+                        float distancia = Vector3.Distance(personajeAlFrente.transform.position, puntoDestinoFinal.position);
+                        if (distancia < 0.5f)
+                        {
+                            esperandoQueLlegueAlPunto = false;
+                            VerificarLlegadaAlFrente();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // Si aún están las reglas en pantalla, no procesamos la lógica de la partida
+                return;
+            }
+        }
+
+        // 2. Control del temporizador de la ronda
         if (rondaActiva)
         {
             tiempoRestante -= Time.deltaTime;
@@ -152,6 +193,7 @@ public class CanvasManager : MonoBehaviour
             }
         }
 
+        // 3. Comprobar llegada del personaje al frente de la fila
         if (esperandoQueLlegueAlPunto && personajesEnFila.Count > 0)
         {
             int indiceFrente = puntosFila.Length - 1;
@@ -174,6 +216,7 @@ public class CanvasManager : MonoBehaviour
             }
         }
 
+        // 4. Procesamiento del teclado
         if (Keyboard.current != null)
         {
             if (Keyboard.current.anyKey.wasPressedThisFrame)
@@ -192,10 +235,11 @@ public class CanvasManager : MonoBehaviour
     }
 
     private void TiempoAgotado()
-    {
+    {   
         rondaActiva = false;
         personajeActivoParaFrente = false;
-        Debug.LogWarning("¡TIEMPO AGOTADO! Se acabó el tiempo de la ronda.");
+        Debug.LogWarning("¡TIEMPO AGOTADO! Se acabó la ronda.");
+        Ocultar();
     }
 
     private void ProcesarEntradaTeclado(string teclaPresionada)
@@ -236,8 +280,9 @@ public class CanvasManager : MonoBehaviour
 
     private System.Collections.IEnumerator RutinaVictoria(float tiempoEspera)
     {
-        if (spriteRenderer != null) {spriteRenderer.sprite = ianSirve;}
+        if (spriteRenderer != null) { spriteRenderer.sprite = ianSirve; }
 
+        rondaActiva = false;
         personajeActivoParaFrente = false; 
         Ocultar();
         yield return new WaitForSeconds(tiempoEspera); 
@@ -276,5 +321,24 @@ public class CanvasManager : MonoBehaviour
 
         estaCastigado = false;
         Debug.Log("Fin del castigo. ¡A jugar de nuevo!");
+    }
+
+    private System.Collections.IEnumerator RutinaQuitarReglas(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+
+        foreach (GameObject obj in keysList)
+        {
+            TeclasManager tm = obj.GetComponent<TeclasManager>();
+            if (tm != null)
+            {
+                tm.state = 0;
+            }
+        }      
+        
+        if (objetoReglas != null)
+        {
+            objetoReglas.SetActive(false);
+        }
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class rondaAplastarManager : MonoBehaviour
 {
+    [SerializeField] private GameObject objetoReglas;
     [SerializeField] private Transform[] vegetalSpawnPoints;
 
     [SerializeField] private GameObject vegetalPrefab;
@@ -31,6 +32,11 @@ public class rondaAplastarManager : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
 
         SpawnVegetal();
+
+        /*if (objetoReglas != null)
+        {
+            StartCoroutine(RutinaQuitarReglas(5.0f));
+        }*/
     }
 
     void Update()
@@ -151,5 +157,25 @@ public class rondaAplastarManager : MonoBehaviour
             SpawnVegetal();
         }
     }
+
+    /*private System.Collections.IEnumerator RutinaQuitarReglas(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+
+        foreach (GameObject obj in keysList)
+        {
+            TeclasManager tm = obj.GetComponent<TeclasManager>();
+            if (tm != null)
+            {
+                tm.state = 0;
+            }
+        }      
+        
+        if (objetoReglas != null)
+        {
+            objetoReglas.SetActive(false);
+        }
+        SpawnVegetal();
+    }*/ // Descomenta eto para quitar el panel de reglas y que empieze el juego.
 
 }
