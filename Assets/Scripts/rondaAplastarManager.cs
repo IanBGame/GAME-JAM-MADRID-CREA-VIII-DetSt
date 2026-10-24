@@ -25,18 +25,16 @@ public class rondaAplastarManager : MonoBehaviour
 
     private bool rondaOver;
 
-    private GameManager gameManager;
+    [SerializeField] private GameManager gameManager;
 
     void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
 
-        SpawnVegetal();
-
-        /*if (objetoReglas != null)
+        if (objetoReglas != null)
         {
             StartCoroutine(RutinaQuitarReglas(5.0f));
-        }*/
+        }
     }
 
     void Update()
@@ -158,24 +156,15 @@ public class rondaAplastarManager : MonoBehaviour
         }
     }
 
-    /*private System.Collections.IEnumerator RutinaQuitarReglas(float tiempo)
+    private System.Collections.IEnumerator RutinaQuitarReglas(float tiempo)
     {
         yield return new WaitForSeconds(tiempo);
-
-        foreach (GameObject obj in keysList)
-        {
-            TeclasManager tm = obj.GetComponent<TeclasManager>();
-            if (tm != null)
-            {
-                tm.state = 0;
-            }
-        }      
         
         if (objetoReglas != null)
         {
             objetoReglas.SetActive(false);
         }
         SpawnVegetal();
-    }*/ // Descomenta eto para quitar el panel de reglas y que empieze el juego.
+    }
 
 }
