@@ -658,6 +658,7 @@ MonoBehaviour:
   rouletteTime: 3
   rouletteRotation: 180
   numberOfSections: 8
+  playerAnimator: {fileID: 1203704266}
   roulette: {fileID: 44719991}
 --- !u!1 &1015110457
 GameObject:

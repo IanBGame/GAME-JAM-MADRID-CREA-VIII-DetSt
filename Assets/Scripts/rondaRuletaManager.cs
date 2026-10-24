@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class rondaRuletaManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class rondaRuletaManager : MonoBehaviour
     [SerializeField] private float rouletteRotation = 180.0f;
 
     [SerializeField] private int numberOfSections = 8;
+
+    [SerializeField] private Animator playerAnimator;
+
+    [SerializeField] private int roundNumber = 5;
+    private int currentRound = 0;
 
     private bool isSpinning;
     private bool isRouletteFinished;
@@ -53,11 +59,17 @@ public class rondaRuletaManager : MonoBehaviour
     private void StopRoulette()
     {
         isSpinning = false;
-        isRouletteFinished = false;
-
-        float stopRotationvalue = roulette.transform.eulerAngles.z;
 
         RouletteValueCheck();
+
+        currentRound++;
+
+        if (currentRound >= roundNumber)
+        {
+            isRouletteFinished = true;
+            StartCoroutine(EndRound());
+        }
+
     }
 
     private void RouletteValueCheck()
@@ -70,12 +82,44 @@ public class rondaRuletaManager : MonoBehaviour
 
         if (section == 0 || section == 2 || section == 4 || section == 6)
         {
-            gameManager.AddScoreMedium();
+            gameManager.AddScoreHigh();
+            AnimacionAcierto();
         }
         else
         {
-            gameManager.SubtractScore();
+            gameManager.SubtractScoreBig();
+            AnimacionFallo();
         }
+
+        StartCoroutine(ResetAnimation());
+    }
+
+    private void AnimacionAcierto()
+    {
+        playerAnimator.SetBool("isHappy", true);
+        playerAnimator.SetBool("isSad", false);
+    }
+
+    private void AnimacionFallo()
+    {
+        playerAnimator.SetBool("isHappy", false);
+        playerAnimator.SetBool("isSad", true);
+    }
+
+    private IEnumerator ResetAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+
+        playerAnimator.SetBool("isHappy", false);
+        playerAnimator.SetBool("isSad", false);
+    }
+
+    private IEnumerator EndRound()
+    {
+        yield return new WaitForSeconds(2f);
+
+        gameManager.GetRuletaScore();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }

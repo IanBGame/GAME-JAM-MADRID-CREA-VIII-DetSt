@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using TMPro;
 using Debug = UnityEngine.Debug;
+using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -37,10 +38,14 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private float duracionRonda = 30f; 
     private float tiempoRestante;
     private bool rondaActiva = false;
-    private bool juegoIniciado = false; 
+    private bool juegoIniciado = false;
+
+    private GameManager gameManager;
 
     void Start() 
     {
+        gameManager = FindFirstObjectByType<GameManager>();
+
         tiempoRestante = duracionRonda;
         rondaActiva = false;
         juegoIniciado = false;
@@ -282,6 +287,7 @@ public class CanvasManager : MonoBehaviour
     {
         if (spriteRenderer != null) { spriteRenderer.sprite = ianSirve; }
 
+        gameManager.AddScoreMedium();
         rondaActiva = false;
         personajeActivoParaFrente = false; 
         Ocultar();
@@ -306,6 +312,7 @@ public class CanvasManager : MonoBehaviour
 
     private System.Collections.IEnumerator RutinaCastigoFallo(float tiempoCastigo)
     {
+        gameManager.SubtractScoreBig();
         estaCastigado = true;
         yield return new WaitForSeconds(tiempoCastigo);
         indiceActual = 0;
