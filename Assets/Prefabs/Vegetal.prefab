@@ -112,5 +112,5 @@ MonoBehaviour:
   - {fileID: -8263988275146868756, guid: cc2a1fe9d53196a41ac5a572519e4625, type: 3}
   - {fileID: 8758471090843487151, guid: 10bf7929918eaa042a24cf2cecb2abbe, type: 3}
   - {fileID: 7089001656594423714, guid: 0634e5f2adf3233419c4ef490ec052c6, type: 3}
-  visualContainer: {fileID: 3636473128774060178}
-  isBad: 0
+  spriteRenderer: {fileID: 3636473128774060178}
+  isGood: 0

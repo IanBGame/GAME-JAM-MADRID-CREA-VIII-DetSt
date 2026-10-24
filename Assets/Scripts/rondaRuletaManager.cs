@@ -1,45 +1,64 @@
+using System.Collections;
 using UnityEngine;
-using TMPro;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class rondaRuletaManager : MonoBehaviour
 {
-    [Header("¡¡¡EL VALOR SE REDUCE POR 50 CADA SEGUNDO!!!")]
-
-    [SerializeField] private int rouletteTimer;
+    [SerializeField] private float minTimer = 3f;
+    [SerializeField] private float maxTimer = 5f;
 
     [SerializeField] private float rouletteRotation = 180.0f;
 
     [SerializeField] private int numberOfSections = 8;
 
-    [SerializeField] private TextMeshProUGUI buttonText;
-
     private bool isSpinning;
+    private bool isRouletteFinished;
 
-    GameObject roulette;
+    [SerializeField] GameObject roulette;
 
-    private void FixedUpdate()
+    private GameManager gameManager;
+
+    private void Start()
     {
-        if(isSpinning == true)
+        gameManager = FindFirstObjectByType<GameManager>();
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && !isSpinning && !rouletteFinished)
         {
-            roulette.transform.Rotate(0.0f, 0.0f, rouletteRotation * Time.deltaTime);
+            RotateRoulette();
+        }
+
+        if(isSpinning)
+        {
+            roulete.transform.Rotate(0f, 0f, rouletteRotation * Time.deltaTime);
         }
     }
 
     private void RotateRoulette()
     {
         isSpinning = true;
-        buttonText.text = "PARAR";
+
+        StartCoroutine(RouletteTimer());
+    }
+
+    private IEnumerator RouletteTimer()
+    {
+        yield return new WaitForSeconds(randomTime);
+
+        StopRoulette();
     }
 
     private void StopRoulette()
     {
-        //Alomejor hacer que no pare repentinamente y tarde un poco?
         isSpinning = false;
+        isRouletteFinished = false;
 
         float stopRotationvalue = roulette.transform.eulerAngles.z;
 
         RouletteValueCheck();
-        buttonText.text = "GIRAR";
     }
 
     private void RouletteValueCheck()
@@ -48,18 +67,15 @@ public class rondaRuletaManager : MonoBehaviour
 
         float sectionSize = 360f / numberOfSections;
 
-        int section = Mathf.FloorToInt(rotation /45f);
-    }
+        int section = Mathf.FloorToInt(rotation / sectionSize);
 
-    public void RouletteButtonHit()
-    {
-        if(isSpinning)
+        if (section == 0 || section == 2 || section == 4 || section == 6)
         {
-            StopRoulette();
+            gameManager.AddScoreMedium();
         }
         else
         {
-            RotateRoulette();
+            gameManager.SubtractScore();
         }
     }
 

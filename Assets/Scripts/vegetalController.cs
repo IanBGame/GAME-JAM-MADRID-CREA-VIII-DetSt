@@ -5,54 +5,30 @@ public class VegetalController : MonoBehaviour
 {
     [SerializeField] private Sprite[] vegetableSkins;
 
-    [SerializeField] private SpriteRenderer visualContainer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private int vegetableType;
-    public bool isBad;
+    public bool isGood;
 
     private rondaAplastarManager manager;
 
-    public void Initialize(bool bad, rondaAplastarManager managerRef)
+    public void Initialize(bool good)
     {
-        isBad = bad;
-        manager = managerRef;
-    }
+        isGood = good;
 
-    private void OnMouseDown()
-    {
-        manager.VegetalSeleccionado(isBad);
-    }
+        int skinNumber;
 
-    private void Awake()
-    {
-        vegetableType = Random.Range(1, 4);
-    
-        if(vegetableType == 1)
+        if(isGood)
         {
-            //SpriteRenderer.Sprite = vegetableSkins[vegetableType];
-            CheckSkin();
-        }
-        else if(vegetableType == 2)
-        {
-            //SpriteRenderer.Sprite = vegetableSkins[vegetableType];
-            CheckSkin();
-        }
-        else if(vegetableType == 3)
-        {
-            //SpriteRenderer.Sprite = vegetableSkins[vegetableType];
-            CheckSkin();
-        }
-    }
-
-    public void CheckSkin()
-    {
-        if(!isBad)
-        {
-            //SpriteRenderer.Sprite = vegetableSkins[vegetableType + 3];
+            skinNumber = Random.Range(0, 3);
         }
         else
         {
-            //SpriteRenderer.Sprite = vegetableSkins[vegetableType + 3];
+            skinNumber = Random.Range(3, 6);
         }
+
+        spriteRenderer.sprite = vegetableSkins[skinNumber];
     }
+
+  
 }

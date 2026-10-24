@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class rondaAplastarManager : MonoBehaviour
 {
@@ -10,20 +13,59 @@ public class rondaAplastarManager : MonoBehaviour
     [SerializeField] private GameObject vegetalPrefab;
     [SerializeField] private GameObject playerPrefab;
 
-    private int numeroVegetalMalo;
+    [SerializeField] private Animator playerAnimator;
+
+    [SerializeField] private int roundNumber = 10;
+    private int currentRound = 1;
+
+    private int numeroVegetalBueno;
 
     private List<GameObject> vegetalesSpawneados = new List<GameObject>();
 
     private bool rondaOver;
 
+    private GameManager gameManager;
+
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
+
         SpawnVegetal();
+    }
+
+    void Update()
+    {
+        if(rondaOver || Keyboard.current == null)
+        {
+            return;
+        }
+
+        if(Keyboard.current.aKey.wasPressedThisFrame)
+        {
+            playerAnimator.SetBool("leftPressed", true);
+            playerAnimator.SetBool("middlePressed", false);
+            playerAnimator.SetBool("rightPressed", false);
+            VegetalSeleccionado(0);
+        }
+        else if (Keyboard.current.sKey.wasPressedThisFrame)
+        {
+            playerAnimator.SetBool("leftPressed", false);
+            playerAnimator.SetBool("middlePressed", true);
+            playerAnimator.SetBool("rightPressed", false);
+            VegetalSeleccionado(1);
+        }
+        else if (Keyboard.current.dKey.wasPressedThisFrame)
+        {
+            playerAnimator.SetBool("leftPressed", false);
+            playerAnimator.SetBool("middlePressed", false);
+            playerAnimator.SetBool("rightPressed", true);
+            VegetalSeleccionado(2);
+        }
     }
 
     private void RandomizarVegetal()
     {
-        numeroVegetalMalo = Random.Range(1, 4);
+        numeroVegetalBueno = Random.Range(0, vegetalSpawnPoints.Length);
     }
 
     private void SpawnVegetal()
@@ -33,35 +75,48 @@ public class rondaAplastarManager : MonoBehaviour
         RandomizarVegetal();
 
 
-        for (int i = 0; vegetalSpawnPoints.Length > i; i++)
+        for (int i = 0; vegetalSpawnPoints.Length > i; i++) 
         {
             GameObject vegetalSpawneado = Instantiate(vegetalPrefab,vegetalSpawnPoints[i].position,vegetalSpawnPoints[i].rotation);
             VegetalController vegetalController = vegetalSpawneado.GetComponent<VegetalController>();
 
-            vegetalController.Initialize(i == numeroVegetalMalo, this);
+            vegetalController.Initialize(i == numeroVegetalBueno);
 
             vegetalesSpawneados.Add(vegetalSpawneado);
         }
     }
 
-    public void VegetalSeleccionado(bool isBad)
+    public void VegetalSeleccionado(int indice)
     {
         if(rondaOver)
         {
             return;
         }
 
+        if (indice < 0 || indice >= vegetalSpawnPoints.Length)
+        {
+            return;
+        }
+
         rondaOver = true;
 
-        if(isBad)
+        if (indice == numeroVegetalBueno)
         {
-            //RELLENAR PUNTOS
+            if (gameManager != null)
+            {
+                gameManager.AddScoreMedium();
+            }
+                
         }
         else
         {
-            //RELLENAR PUNTOS
+            if (gameManager != null)
+            {
+                gameManager.SubtractScore();
+            }
+                
         }
-
+        
         StartCoroutine(SiguienteRonda());
     }
 
@@ -69,6 +124,7 @@ public class rondaAplastarManager : MonoBehaviour
     {
         foreach(GameObject vegetal in vegetalesSpawneados)
         {
+            vegetal.SetActive(false);
             Destroy(vegetal);
         }
 
@@ -77,9 +133,22 @@ public class rondaAplastarManager : MonoBehaviour
 
     private IEnumerator SiguienteRonda()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
 
+        playerAnimator.SetBool("leftPressed", false);
+        playerAnimator.SetBool("middlePressed", false);
+        playerAnimator.SetBool("rightPressed", false);
         DestruirVegetales();
-        SpawnVegetal();
+
+        if (currentRound >= roundNumber)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            currentRound++;
+            SpawnVegetal();
+        }
     }
+
 }

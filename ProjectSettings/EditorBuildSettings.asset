@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/RondaRuleta.unity
     guid: 04b14fb401f02ec449e1e34ff4f4a35c
   - enabled: 1
+    path: Assets/Scenes/RondaAguadores.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
     path: Assets/Scenes/ScoreScene.unity
     guid: b94d423d046194c4992be2ce650788f6
   m_configObjects:
