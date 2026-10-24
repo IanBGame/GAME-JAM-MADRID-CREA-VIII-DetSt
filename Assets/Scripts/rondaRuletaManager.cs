@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class rondaRuletaManager : MonoBehaviour
 {
+    [SerializeField] private GameObject objetoReglas;
+
     [SerializeField] private float rouletteTime = 3f;
 
     [SerializeField] private float rouletteRotation = 180.0f;
@@ -17,6 +19,7 @@ public class rondaRuletaManager : MonoBehaviour
     [SerializeField] private int roundNumber = 5;
     private int currentRound = 0;
 
+    private bool canSpin = false;
     private bool isSpinning;
     private bool isRouletteFinished;
 
@@ -27,15 +30,23 @@ public class rondaRuletaManager : MonoBehaviour
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+
+        if (objetoReglas != null)
+        {
+            StartCoroutine(RutinaQuitarReglas(5.0f));
+        }
     }
 
     private void Update()
     {
-        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && !isSpinning && !isRouletteFinished)
+        if (canSpin)
         {
-            RotateRoulette();
+            if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && !isSpinning && !isRouletteFinished)
+            {
+                RotateRoulette();
+            }
         }
-
+        
         if(isSpinning)
         {
             roulette.transform.Rotate(0f, 0f, rouletteRotation * Time.deltaTime);
@@ -120,6 +131,17 @@ public class rondaRuletaManager : MonoBehaviour
 
         gameManager.GetRuletaScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private System.Collections.IEnumerator RutinaQuitarReglas(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        
+        if (objetoReglas != null)
+        {
+            objetoReglas.SetActive(false);
+        }
+        canSpin = true;
     }
 
 }

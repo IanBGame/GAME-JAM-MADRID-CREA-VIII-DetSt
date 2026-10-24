@@ -40,7 +40,7 @@ public class CanvasManager : MonoBehaviour
     private bool rondaActiva = false;
     private bool juegoIniciado = false;
 
-    private GameManager gameManager;
+    [SerializeField] private GameManager gameManager;
 
     void Start() 
     {
@@ -177,7 +177,6 @@ public class CanvasManager : MonoBehaviour
             }
             else
             {
-                // Si aún están las reglas en pantalla, no procesamos la lógica de la partida
                 return;
             }
         }
@@ -245,6 +244,7 @@ public class CanvasManager : MonoBehaviour
         personajeActivoParaFrente = false;
         Debug.LogWarning("¡TIEMPO AGOTADO! Se acabó la ronda.");
         Ocultar();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void ProcesarEntradaTeclado(string teclaPresionada)

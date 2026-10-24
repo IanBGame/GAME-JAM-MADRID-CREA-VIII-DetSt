@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int aplastarScore;
     public int panueloScore;
     public int ruletaScore;
+     public int aguadorScore;
 
     public int scoreLowAdd;
     public int scoreMediumAdd;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string rondaPanueloScene = "RondaPanuelo";
     [SerializeField] private string rondaRuletaScene = "RondaRuleta";
     [SerializeField] private string rondaAguadoresScene = "RondaAguadores";
+    [SerializeField] private string creditos = "creditos";
     [SerializeField] private string scoreScene = "ScoreScene";
 
     [SerializeField] private LocalLeaderboard leaderboard; //Necesario para guardar el score en el leaderboard al finalizar la partida
@@ -56,6 +58,11 @@ public class GameManager : MonoBehaviour
     {
         ruletaScore = totalScore - aplastarScore - panueloScore;
         return ruletaScore;
+    }
+    public int GetAguadorScore()
+    {
+        aguadorScore = totalScore - aplastarScore - panueloScore - ruletaScore;
+        return aguadorScore;
     }
 
     public void AddScoreLow()
@@ -97,9 +104,14 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(rondaRuletaScene);
     }
+
     public void GoToRondaAguadores()
     {
         SceneManager.LoadScene(rondaAguadoresScene);
+    }
+    public void GoToCreditos()
+    {
+        SceneManager.LoadScene(creditos);
     }
 
     public void GoToScoreScene()

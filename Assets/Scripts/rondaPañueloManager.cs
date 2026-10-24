@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class rondaPañueloManager : MonoBehaviour
 {
+    [SerializeField] private GameObject objetoReglas;
+
     private int letterNumber;
     private int pressedNumber;
     private int currentScore;
@@ -28,8 +30,10 @@ public class rondaPañueloManager : MonoBehaviour
     private void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
-
-        StartRound();
+        if (objetoReglas != null)
+        {
+            StartCoroutine(RutinaQuitarReglas(5.0f));
+        }
     }
 
     private void Update()
@@ -162,6 +166,17 @@ public class rondaPañueloManager : MonoBehaviour
 
         gameManager.GetPanueloScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private System.Collections.IEnumerator RutinaQuitarReglas(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        
+        if (objetoReglas != null)
+        {
+            objetoReglas.SetActive(false);
+        }
+        StartRound();
     }
 
 }
