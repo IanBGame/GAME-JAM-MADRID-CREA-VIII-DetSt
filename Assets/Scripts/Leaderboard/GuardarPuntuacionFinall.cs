@@ -15,7 +15,7 @@ public class GuardarPuntuacionFinall : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
     }
 
-    public void GuardarPuntuación()
+    public void GuardarPuntuacion()
     {
         string nombre = nombreJugadorInput.text.Trim();
 

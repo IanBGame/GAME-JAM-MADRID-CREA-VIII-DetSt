@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using TMPro;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
@@ -25,6 +26,7 @@ public class rondaAplastarManager : MonoBehaviour
 
     private bool rondaOver;
 
+    [SerializeField] private TextMeshProUGUI textoPuntos;
     [SerializeField] private GameManager gameManager;
 
     void Start()
@@ -39,6 +41,11 @@ public class rondaAplastarManager : MonoBehaviour
 
     void Update()
     {
+        if (textoPuntos != null)
+        {
+            textoPuntos.text = Mathf.Ceil(gameManager.aplastarScore).ToString();
+        }
+
         if(rondaOver || Keyboard.current == null)
         {
             return;

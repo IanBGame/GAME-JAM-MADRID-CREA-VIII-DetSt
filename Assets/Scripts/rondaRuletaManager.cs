@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using TMPro;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
@@ -25,6 +26,7 @@ public class rondaRuletaManager : MonoBehaviour
 
     [SerializeField] GameObject roulette;
 
+    [SerializeField] private TextMeshProUGUI textoPuntos;
     private GameManager gameManager;
 
     private void Start()
@@ -39,6 +41,11 @@ public class rondaRuletaManager : MonoBehaviour
 
     private void Update()
     {
+        if (textoPuntos != null)
+        {
+            textoPuntos.text = Mathf.Ceil(gameManager.ruletaScore).ToString();
+        }
+
         if (canSpin)
         {
             if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && !isSpinning && !isRouletteFinished)
@@ -107,22 +114,22 @@ public class rondaRuletaManager : MonoBehaviour
 
     private void AnimacionAcierto()
     {
-        playerAnimator.SetBool("isHappy", true);
-        playerAnimator.SetBool("isSad", false);
+        playerAnimator.SetBool("IsHappy", true);
+        playerAnimator.SetBool("IsSad", false);
     }
 
     private void AnimacionFallo()
     {
-        playerAnimator.SetBool("isHappy", false);
-        playerAnimator.SetBool("isSad", true);
+        playerAnimator.SetBool("IsHappy", false);
+        playerAnimator.SetBool("IsSad", true);
     }
 
     private IEnumerator ResetAnimation()
     {
         yield return new WaitForSeconds(1f);
 
-        playerAnimator.SetBool("isHappy", false);
-        playerAnimator.SetBool("isSad", false);
+        playerAnimator.SetBool("IsHappy", false);
+        playerAnimator.SetBool("IsSad", false);
     }
 
     private IEnumerator EndRound()

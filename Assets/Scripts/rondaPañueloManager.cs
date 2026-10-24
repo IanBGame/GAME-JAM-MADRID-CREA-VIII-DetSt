@@ -25,6 +25,7 @@ public class rondaPañueloManager : MonoBehaviour
 
     [SerializeField] TMP_Text textoTecla;
 
+    [SerializeField] private TextMeshProUGUI textoPuntos;
     private GameManager gameManager;
 
     private void Start()
@@ -38,6 +39,11 @@ public class rondaPañueloManager : MonoBehaviour
 
     private void Update()
     {
+        if (textoPuntos != null)
+        {
+            textoPuntos.text = Mathf.Ceil(gameManager.panueloScore).ToString();
+        }
+
         if (!isInRound)
             return;
 

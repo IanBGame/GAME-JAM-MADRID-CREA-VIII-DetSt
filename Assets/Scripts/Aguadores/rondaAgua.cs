@@ -32,7 +32,8 @@ public class CanvasManager : MonoBehaviour
     private bool estaCastigado = false;
 
     [Header("Interfaz (UI)")]
-    [SerializeField] private TextMeshProUGUI textoTemporizador;
+    [SerializeField] private TextMeshProUGUI textoTemporizador; 
+    [SerializeField] private TextMeshProUGUI textoPuntos;
 
     [Header("Configuración de Tiempo")]
     [SerializeField] private float duracionRonda = 30f; 
@@ -189,6 +190,11 @@ public class CanvasManager : MonoBehaviour
             if (textoTemporizador != null)
             {
                 textoTemporizador.text = Mathf.Ceil(tiempoRestante).ToString() + "s";
+            }
+
+            if (textoPuntos != null)
+            {
+                textoPuntos.text = Mathf.Ceil(gameManager.aguadorScore).ToString();
             }
 
             if (tiempoRestante <= 0)

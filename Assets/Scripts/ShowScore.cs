@@ -6,12 +6,16 @@ public class ShowScore : MonoBehaviour
     private int aplastarScore;
     private int panueloScore;
     private int ruletaScore;
-    private int totalScore;
+    private int total;
 
     [SerializeField] private GameManager gameManager;
-    //gameManager = GameObject.Find("GameManager");
 
     [SerializeField] private TMP_Text[] scoreTexts;
+
+    void Start()
+    {
+        gameManager = FindFirstObjectByType<GameManager>();
+    }
 
     private void Awake()
     {
@@ -24,7 +28,7 @@ public class ShowScore : MonoBehaviour
         aplastarScore = gameManager.GetAplastarScore();
         panueloScore = gameManager.GetPanueloScore();
         ruletaScore = gameManager.GetRuletaScore();
-        totalScore = gameManager.totalScore;
+        total = gameManager.totalScore;
     }
 
     private void SetTexts()
@@ -32,7 +36,7 @@ public class ShowScore : MonoBehaviour
         scoreTexts[0].text = "Puntuacion de la primera ronda: " + aplastarScore;
         scoreTexts[0].text = "Puntuacion de la segunda ronda: " + panueloScore;
         scoreTexts[0].text = "Puntuacion de la primera ronda: " + ruletaScore;
-        scoreTexts[0].text = "Puntuacion de la primera ronda: " + totalScore;
+        scoreTexts[0].text = "Puntuacion de la primera ronda: " + total;
     }
 
 }
