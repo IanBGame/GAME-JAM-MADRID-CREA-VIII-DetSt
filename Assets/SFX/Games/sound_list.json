@@ -1,0 +1,42 @@
+[
+ {
+  "file": "verdulera_good",
+  "seconds": 0.222,
+  "use": "Grabbed a good vegetable: soil scrape, cork-pop, upward 'bwip!'"
+ },
+ {
+  "file": "verdulera_fail",
+  "seconds": 0.35,
+  "use": "Grabbed a rotten vegetable: wet squelch + deflated 'bwuhh'"
+ },
+ {
+  "file": "lavanderas_good",
+  "seconds": 0.094,
+  "use": "Each successful tug: crisp sheet snap + tiny 'hup' (short, mash-friendly)"
+ },
+ {
+  "file": "lavanderas_fail",
+  "seconds": 0.53,
+  "use": "Opponent yanks you / you lose ground: whoosh, slap-thud, drooping boing"
+ },
+ {
+  "file": "barquillera_good",
+  "seconds": 0.462,
+  "use": "Wheel lands on a high number: wooden clack + bright ting"
+ },
+ {
+  "file": "barquillera_fail",
+  "seconds": 0.53,
+  "use": "Wheel lands on a low number: dull clonk + wobbly 'bwoing'"
+ },
+ {
+  "file": "aguador_good",
+  "seconds": 0.262,
+  "use": "Correct button / order served: water 'bloop' + glass tink"
+ },
+ {
+  "file": "aguador_fail",
+  "seconds": 0.38,
+  "use": "Wrong button: tin cup clatters, water spills, droopy 'bwuh'"
+ }
+]

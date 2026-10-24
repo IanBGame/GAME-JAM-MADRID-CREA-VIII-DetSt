@@ -1,0 +1,22 @@
+[
+ {
+  "file": "ui_move",
+  "seconds": 0.06,
+  "use": "Cursor moves between options (very short tuned tok)"
+ },
+ {
+  "file": "ui_select",
+  "seconds": 0.23,
+  "use": "Confirm a menu option: 'pon!' up-glide"
+ },
+ {
+  "file": "ui_back",
+  "seconds": 0.164,
+  "use": "Back / cancel: soft down-glide 'bwoo'"
+ },
+ {
+  "file": "ui_start",
+  "seconds": 0.51,
+  "use": "Start the remix: two-step 'pa-PAN!' + ting"
+ }
+]
