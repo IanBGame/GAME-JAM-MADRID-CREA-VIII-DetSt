@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int scoreMediumAdd;
     public int scoreHighAdd;
     public int scoreSubtract;
+    public int scoreSubtractBig;
 
     [SerializeField] private string rondaAplastarScene = "RondaAplastar";
     [SerializeField] private string rondaPanueloScene = "RondaPanuelo";
@@ -75,6 +76,11 @@ public class GameManager : MonoBehaviour
     public void SubtractScore()
     {
         totalScore -= scoreSubtract;
+    }
+
+    public void SubtractScoreBig()
+    {
+        totalScore -= scoreSubtractBig;
     }
 
     public void GoToRondaAplastar()

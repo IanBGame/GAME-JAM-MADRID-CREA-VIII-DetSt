@@ -366,10 +366,11 @@ MonoBehaviour:
   aplastarScore: 0
   panueloScore: 0
   ruletaScore: 0
-  scoreLowAdd: 0
-  scoreMediumAdd: 0
-  scoreHighAdd: 0
-  scoreSubtract: 0
+  scoreLowAdd: 10
+  scoreMediumAdd: 250
+  scoreHighAdd: 500
+  scoreSubtract: 10
+  scoreSubtractBig: 250
   rondaAplastarScene: RondaAplastar
   rondaPanueloScene: RondaPanuelo
   rondaRuletaScene: RondaRuleta

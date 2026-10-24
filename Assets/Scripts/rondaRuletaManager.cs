@@ -5,8 +5,7 @@ using Random = UnityEngine.Random;
 
 public class rondaRuletaManager : MonoBehaviour
 {
-    [SerializeField] private float minTimer = 3f;
-    [SerializeField] private float maxTimer = 5f;
+    [SerializeField] private float rouletteTime = 3f;
 
     [SerializeField] private float rouletteRotation = 180.0f;
 
@@ -26,14 +25,14 @@ public class rondaRuletaManager : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && !isSpinning && !rouletteFinished)
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && !isSpinning && !isRouletteFinished)
         {
             RotateRoulette();
         }
 
         if(isSpinning)
         {
-            roulete.transform.Rotate(0f, 0f, rouletteRotation * Time.deltaTime);
+            roulette.transform.Rotate(0f, 0f, rouletteRotation * Time.deltaTime);
         }
     }
 
@@ -46,7 +45,7 @@ public class rondaRuletaManager : MonoBehaviour
 
     private IEnumerator RouletteTimer()
     {
-        yield return new WaitForSeconds(randomTime);
+        yield return new WaitForSeconds(rouletteTime);
 
         StopRoulette();
     }

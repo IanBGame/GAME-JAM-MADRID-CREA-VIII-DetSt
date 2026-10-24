@@ -104,7 +104,7 @@ public class rondaAplastarManager : MonoBehaviour
         {
             if (gameManager != null)
             {
-                gameManager.AddScoreMedium();
+                gameManager.AddScoreHigh();
             }
                 
         }
@@ -112,7 +112,7 @@ public class rondaAplastarManager : MonoBehaviour
         {
             if (gameManager != null)
             {
-                gameManager.SubtractScore();
+                gameManager.SubtractScoreBig();
             }
                 
         }
@@ -142,6 +142,7 @@ public class rondaAplastarManager : MonoBehaviour
 
         if (currentRound >= roundNumber)
         {
+            gameManager.GetAplastarScore();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else

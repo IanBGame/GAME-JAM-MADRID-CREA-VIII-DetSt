@@ -373,8 +373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: "Assembly-CSharp::rondaPa\xF1ueloManager"
   isInRound: 0
-  minTimer: 200
-  maxTimer: 500
+  minTimer: 4
+  maxTimer: 10
+  roundDuration: 30
   textoTecla: {fileID: 1937407241}
 --- !u!1 &766129088
 GameObject:

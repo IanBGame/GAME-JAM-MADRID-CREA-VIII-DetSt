@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class rondaPañueloManager : MonoBehaviour
 {
@@ -65,10 +66,15 @@ public class rondaPañueloManager : MonoBehaviour
 
     private void RandomizeLetter()
     {
-        //Se randomiza (1-4) el numero letterNumber y luego dependiendo del numero que sea
-        letterNumber = Random.Range(1, 5);
+        int previousLetter = letterNumber;
+
+        do
+        {
+            letterNumber = Random.Range(1, 5);
+        }
+        while (letterNumber == previousLetter);
+        //Se randomiza (1-4) el numero letterNumber
         //D-F-J-K
-        //Se randomiza también pressedTimer (4-10 secs max?)
         pressedTimer = Random.Range(minTimer, maxTimer);
     }
 
@@ -103,7 +109,7 @@ public class rondaPañueloManager : MonoBehaviour
 
         Keyboard keyboard = Keyboard.current;
 
-        if(keyboard != null)
+        if(keyboard == null)
         {
             return;
         }
@@ -140,7 +146,7 @@ public class rondaPañueloManager : MonoBehaviour
 
     private void HasHitInputRight()
     {
-        gameManager.AddScoreMedium();
+        gameManager.AddScoreLow();
     }
 
     private void HasHitInputWrong()
@@ -153,6 +159,9 @@ public class rondaPañueloManager : MonoBehaviour
         isInRound = false;
 
         SetLetterText();
+
+        gameManager.GetPanueloScore();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
