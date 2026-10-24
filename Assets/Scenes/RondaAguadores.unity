@@ -879,6 +879,7 @@ GameObject:
   - component: {fileID: 1142978647}
   - component: {fileID: 1142978646}
   - component: {fileID: 1142978645}
+  - component: {fileID: 1142978648}
   m_Layer: 5
   m_Name: Puntos
   m_TagString: Untagged
@@ -1005,6 +1006,23 @@ RectTransform:
   m_AnchoredPosition: {x: -745, y: 415.7}
   m_SizeDelta: {x: 159.14, y: 151.14}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1142978648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142978644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9605b2c974a876a4e9c0a727261547f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::puntosRondaScript
+  textoPunto: {fileID: 1142978645}
+  isAplastarText: 0
+  isPanueloText: 0
+  isRuletaText: 0
+  isAguaText: 1
 --- !u!1 &1223544167
 GameObject:
   m_ObjectHideFlags: 0

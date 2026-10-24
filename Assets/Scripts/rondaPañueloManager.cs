@@ -9,6 +9,8 @@ public class rondaPañueloManager : MonoBehaviour
 {
     [SerializeField] private GameObject objetoReglas;
 
+    [SerializeField] private Animator playerAnimator;
+
     private int letterNumber;
     private int pressedNumber;
     private int currentScore;
@@ -35,6 +37,8 @@ public class rondaPañueloManager : MonoBehaviour
         {
             StartCoroutine(RutinaQuitarReglas(5.0f));
         }
+        playerAnimator.SetBool("diegoTira", false);
+        playerAnimator.SetBool("manuTira", false);
     }
 
     private void Update()
@@ -156,11 +160,15 @@ public class rondaPañueloManager : MonoBehaviour
 
     private void HasHitInputRight()
     {
+        playerAnimator.SetBool("diegoTira", true);
+        playerAnimator.SetBool("manuTira", false);
         gameManager.AddScoreLow();
     }
 
     private void HasHitInputWrong()
     {
+        playerAnimator.SetBool("manuTira", true);
+        playerAnimator.SetBool("diegoTira", false);
         gameManager.SubtractScore();
     }
 

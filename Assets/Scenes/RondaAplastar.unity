@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 172618224}
   - component: {fileID: 172618226}
   - component: {fileID: 172618225}
+  - component: {fileID: 172618227}
   m_Layer: 5
   m_Name: Puntos
   m_TagString: Untagged
@@ -311,6 +312,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172618223}
   m_CullTransparentMesh: 1
+--- !u!114 &172618227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172618223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9605b2c974a876a4e9c0a727261547f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::puntosRondaScript
+  textoPunto: {fileID: 172618225}
+  isAplastarText: 1
+  isPanueloText: 0
+  isRuletaText: 0
+  isAguaText: 0
 --- !u!1 &237819250
 GameObject:
   m_ObjectHideFlags: 0

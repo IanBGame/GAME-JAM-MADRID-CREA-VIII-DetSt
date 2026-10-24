@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int aplastarScore;
     public int panueloScore;
     public int ruletaScore;
-     public int aguadorScore;
+    public int aguadorScore;
 
     public int scoreLowAdd;
     public int scoreMediumAdd;

@@ -1,9 +1,10 @@
 using System.Collections;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using static System.Collections.Specialized.BitVector32;
+using Random = UnityEngine.Random;
 
 public class rondaRuletaManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class rondaRuletaManager : MonoBehaviour
 
     [SerializeField] private int roundNumber = 5;
     private int currentRound = 0;
+    private int section;
 
     private bool canSpin = false;
     private bool isSpinning;
@@ -88,6 +90,17 @@ public class rondaRuletaManager : MonoBehaviour
             StartCoroutine(EndRound());
         }
 
+        if (section == 0 || section == 2 || section == 4 || section == 6)
+        {
+            AnimacionAcierto();
+        }
+        else
+        {
+            AnimacionFallo();
+        }
+
+        StartCoroutine(ResetAnimation());
+
     }
 
     private void RouletteValueCheck()
@@ -96,20 +109,17 @@ public class rondaRuletaManager : MonoBehaviour
 
         float sectionSize = 360f / numberOfSections;
 
-        int section = Mathf.FloorToInt(rotation / sectionSize);
+        section = Mathf.FloorToInt(rotation / sectionSize);
 
         if (section == 0 || section == 2 || section == 4 || section == 6)
         {
             gameManager.AddScoreHigh();
-            AnimacionAcierto();
         }
         else
         {
             gameManager.SubtractScoreBig();
-            AnimacionFallo();
         }
 
-        StartCoroutine(ResetAnimation());
     }
 
     private void AnimacionAcierto()
