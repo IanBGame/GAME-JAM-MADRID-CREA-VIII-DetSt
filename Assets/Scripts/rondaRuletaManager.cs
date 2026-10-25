@@ -10,7 +10,8 @@ public class rondaRuletaManager : MonoBehaviour
 {
     [SerializeField] private GameObject objetoReglas;
 
-    [SerializeField] private float rouletteTime = 3f;
+    [SerializeField] private float minRouletteTime = 2f;
+    [SerializeField] private float maxRouletteTime = 5f;
 
     [SerializeField] private float rouletteRotation = 180.0f;
 
@@ -71,7 +72,9 @@ public class rondaRuletaManager : MonoBehaviour
 
     private IEnumerator RouletteTimer()
     {
-        yield return new WaitForSeconds(rouletteTime);
+        float randomTime = Random.Range(minRouletteTime, maxRouletteTime);
+
+        yield return new WaitForSeconds(randomTime);
 
         StopRoulette();
     }
