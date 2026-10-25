@@ -82,8 +82,12 @@ public class GameManager : MonoBehaviour
 
     public int GetAguadorScore()
     {
-        aguadorScore = tempScore;
         return aguadorScore;
+    }
+
+    public void SaveAguadorScore()
+    {
+        aguadorScore = tempScore;
     }
 
     public void GetTotalScore()

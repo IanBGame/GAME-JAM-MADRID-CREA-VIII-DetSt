@@ -244,7 +244,7 @@ public class CanvasManager : MonoBehaviour
         personajeActivoParaFrente = false;
         Debug.LogWarning("¡TIEMPO AGOTADO! Se acabó la ronda.");
         Ocultar();
-        gameManager.GetAguadorScore();
+        gameManager.SaveAguadorScore();
         gameManager.ResetTempScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
