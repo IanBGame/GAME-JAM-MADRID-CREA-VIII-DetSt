@@ -663,7 +663,6 @@ MonoBehaviour:
   playerAnimator: {fileID: 1203704266}
   roundNumber: 5
   roulette: {fileID: 44719991}
-  textoPuntos: {fileID: 1154366073}
 --- !u!1 &1015110457
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,8 +959,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18146b31559e64c3c8f3d9e48bb908ef, type: 2}
+  m_sharedMaterial: {fileID: 2623634392025619193, guid: 18146b31559e64c3c8f3d9e48bb908ef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -184,6 +184,7 @@ public class CanvasManager : MonoBehaviour
         // 2. Control del temporizador de la ronda
         if (rondaActiva)
         {
+            gameManager.SaveAguadorScore();
             tiempoRestante -= Time.deltaTime;
 
             if (textoTemporizador != null)
