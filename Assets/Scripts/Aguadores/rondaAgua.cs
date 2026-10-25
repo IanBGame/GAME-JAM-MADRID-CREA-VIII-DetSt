@@ -278,7 +278,7 @@ public class CanvasManager : MonoBehaviour
                 if (indiceActual >= keysList.Length)
                 {
                     Debug.Log("¡GANASTE! Combinación completada.");
-                    StartCoroutine(RutinaVictoria(0.5f));
+                    StartCoroutine(RutinaVictoria(0.3f));
                 }
             }
             else
@@ -295,9 +295,10 @@ public class CanvasManager : MonoBehaviour
 
         gameManager.AddScoreMedium();
         rondaActiva = false;
-        personajeActivoParaFrente = false; 
+        personajeActivoParaFrente = false;
+        yield return new WaitForSeconds(tiempoEspera);
         Ocultar();
-        yield return new WaitForSeconds(tiempoEspera); 
+        yield return new WaitForSeconds(tiempoEspera);
 
         int indiceFrente = puntosFila.Length - 1;
 

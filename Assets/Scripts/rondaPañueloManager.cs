@@ -11,27 +11,33 @@ public class rondaPañueloManager : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite sprD;
+    [SerializeField] private Sprite sprF;
+    [SerializeField] private Sprite sprJ;
+    [SerializeField] private Sprite sprK;
+
     private int letterNumber;
     private int pressedNumber;
     private int currentScore;
+    private float scoreTimer = 0f;
 
     private float pressedTimer;
     private float roundTimer;
 
     public bool isInRound;
 
-    [SerializeField] private float minTimer = 4f;
-    [SerializeField] private float maxTimer = 10f;
+    [SerializeField] private float minTimer = 2f;
+    [SerializeField] private float maxTimer = 5f;
 
     [SerializeField] private float roundDuration = 30f;
 
-    [SerializeField] TMP_Text textoTecla;
-
-    [SerializeField] private TextMeshProUGUI textoPuntos;
+    [SerializeField] private TextMeshProUGUI textoTemporizador;
     private GameManager gameManager;
 
     private void Start()
     {
+        
         gameManager = FindFirstObjectByType<GameManager>();
         if (objetoReglas != null)
         {
@@ -43,9 +49,10 @@ public class rondaPañueloManager : MonoBehaviour
 
     private void Update()
     {
-        if (textoPuntos != null)
+
+        if (textoTemporizador != null)
         {
-            textoPuntos.text = Mathf.Ceil(gameManager.panueloScore).ToString();
+            textoTemporizador.text = Mathf.Ceil(roundTimer).ToString() + "s";
         }
 
         if (!isInRound)
@@ -53,6 +60,16 @@ public class rondaPañueloManager : MonoBehaviour
 
         pressedTimer -= Time.deltaTime;
         roundTimer -= Time.deltaTime;
+
+        if(isInRound)
+        {
+            scoreTimer += Time.deltaTime;
+            if (scoreTimer >= 1f) 
+            {
+                QuitarPuntosPorTiempo();
+                scoreTimer = 0f; 
+            }
+        }
 
         if (roundTimer <= 0)
         {
@@ -69,10 +86,22 @@ public class rondaPañueloManager : MonoBehaviour
         CheckInput();
     }
 
+    private void QuitarPuntosPorTiempo()
+    {     
+        if (gameManager != null)
+        {
+            playerAnimator.SetBool("manuTira", true);
+            playerAnimator.SetBool("diegoTira", false);
+            CameraShake2D.Instance.Shake(0.15f, 0.3f);
+            gameManager.SubtractScore();
+        }
+    }
+
     private void StartRound()
     {
         isInRound = true;
         roundTimer = roundDuration;
+        scoreTimer = 0f;
 
         RandomizeLetter();
         SetLetterText();
@@ -96,24 +125,19 @@ public class rondaPañueloManager : MonoBehaviour
     {
         if(letterNumber == 1 && isInRound)
         {
-            textoTecla.text = "PRESIONA LA D";
+            spriteRenderer.sprite = sprD;
         }
         else if(letterNumber == 2 && isInRound)
         {
-            textoTecla.text = "PRESIONA LA F";
+            spriteRenderer.sprite = sprF;
         }
         else if(letterNumber == 3 && isInRound)
         {
-            textoTecla.text = "PRESIONA LA J";
+            spriteRenderer.sprite = sprJ;
         }
         else if(letterNumber == 4 && isInRound)
         {
-            textoTecla.text = "PRESIONA LA K";
-        }
-
-        if(!isInRound)
-        {
-            textoTecla.text = "";
+            spriteRenderer.sprite = sprK;
         }
     }
     
@@ -162,6 +186,7 @@ public class rondaPañueloManager : MonoBehaviour
     {
         playerAnimator.SetBool("diegoTira", true);
         playerAnimator.SetBool("manuTira", false);
+        CameraShake2D.Instance.Shake(0.15f, 0.3f);
         gameManager.AddScoreLow();
     }
 
@@ -169,6 +194,7 @@ public class rondaPañueloManager : MonoBehaviour
     {
         playerAnimator.SetBool("manuTira", true);
         playerAnimator.SetBool("diegoTira", false);
+        CameraShake2D.Instance.Shake(0.15f, 0.3f);
         gameManager.SubtractScore();
     }
 
