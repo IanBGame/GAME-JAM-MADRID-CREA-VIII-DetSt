@@ -238,8 +238,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 344, y: 0, z: 0}
-  m_LocalScale: {x: 95.04, y: 95.04, z: 95.04}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 110, y: 110, z: 110}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1112058562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -292,7 +292,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 193211645367972691, guid: 68a5ca70cfb6ada4fb1f5cc9f476bcb9, type: 3}
+  m_Sprite: {fileID: 2464344235920735544, guid: 312f5416973ee44f288d10ed51cdca51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -656,7 +656,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::rondaRuletaManager
   objetoReglas: {fileID: 88126991}
-  rouletteTime: 3
+  minRouletteTime: 2
+  maxRouletteTime: 5
   rouletteRotation: 180
   numberOfSections: 8
   playerAnimator: {fileID: 1203704266}

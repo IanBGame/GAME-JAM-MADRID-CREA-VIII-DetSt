@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public int totalScore;
+    public int tempScore;
 
     public int aplastarScore;
     public int panueloScore;
@@ -42,57 +43,85 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetScores()
+    {
+        aplastarScore = 0;
+        panueloScore = 0;
+        ruletaScore = 0;
+        aguadorScore = 0;
+        totalScore = 0;
+    }
+
     public int GetScore()
     {
         return totalScore;
     }
 
+    public void ResetTempScore()
+    {
+        tempScore = 0;
+    }
+
     public int GetAplastarScore()
     {
-        aplastarScore = totalScore;
+        aplastarScore = tempScore;
         return aplastarScore;
     }
 
     public int GetPanueloScore()
     {
-        panueloScore = totalScore - aplastarScore;
+        panueloScore = tempScore;
         return panueloScore;
     }
 
     public int GetRuletaScore()
     {
-        ruletaScore = totalScore - aplastarScore - panueloScore;
+        ruletaScore = tempScore;
         return ruletaScore;
     }
+
     public int GetAguadorScore()
     {
-        aguadorScore = totalScore - aplastarScore - panueloScore - ruletaScore;
+        aguadorScore = tempScore;
         return aguadorScore;
+    }
+
+    public void GetTotalScore()
+    {
+        totalScore = aguadorScore + panueloScore + ruletaScore + aplastarScore;
     }
 
     public void AddScoreLow()
     {
-        totalScore += scoreLowAdd;
+        tempScore += scoreLowAdd;
     }
 
     public void AddScoreMedium()
     {
-        totalScore += scoreMediumAdd;
+        tempScore += scoreMediumAdd;
     }
 
     public void AddScoreHigh()
     {
-        totalScore += scoreHighAdd;
+        tempScore += scoreHighAdd;
     }
     
     public void SubtractScore()
     {
-        totalScore -= scoreSubtract;
+        tempScore -= scoreSubtract;
+        if (tempScore < 0)
+        {
+            tempScore = 0;
+        }
     }
 
     public void SubtractScoreBig()
     {
-        totalScore -= scoreSubtractBig;
+        tempScore -= scoreSubtractBig;
+        if (tempScore < 0)
+        {
+            tempScore = 0;
+        }
     }
 
     public void GoToRondaAplastar()

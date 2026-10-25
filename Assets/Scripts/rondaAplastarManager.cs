@@ -26,7 +26,6 @@ public class rondaAplastarManager : MonoBehaviour
 
     private bool rondaOver;
 
-    [SerializeField] private TextMeshProUGUI textoPuntos;
     [SerializeField] private GameManager gameManager;
 
     void Start()
@@ -41,11 +40,6 @@ public class rondaAplastarManager : MonoBehaviour
 
     void Update()
     {
-        if (textoPuntos != null)
-        {
-            textoPuntos.text = Mathf.Ceil(gameManager.aplastarScore).ToString();
-        }
-
         if(rondaOver || Keyboard.current == null)
         {
             return;
@@ -115,7 +109,7 @@ public class rondaAplastarManager : MonoBehaviour
         {
             if (gameManager != null)
             {
-                gameManager.AddScoreHigh();
+                gameManager.AddScoreMedium();
             }
                 
         }
@@ -154,6 +148,7 @@ public class rondaAplastarManager : MonoBehaviour
         if (currentRound >= roundNumber)
         {
             gameManager.GetAplastarScore();
+            gameManager.ResetTempScore();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else

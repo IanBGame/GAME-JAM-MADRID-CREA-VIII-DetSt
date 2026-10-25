@@ -731,7 +731,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 889683334}
         m_TargetAssemblyTypeName: GuardarPuntuacionFinall, Assembly-CSharp
-        m_MethodName: "GuardarPuntuaci\xF3n"
+        m_MethodName: GuardarPuntuacion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

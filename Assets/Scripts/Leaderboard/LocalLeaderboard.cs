@@ -3,8 +3,24 @@ using System.Collections.Generic;
 
 public class LocalLeaderboard : MonoBehaviour
 {
+    public static LocalLeaderboard instance;
+    
     private const string SaveKey = "LocalLeaderboardData";
     [SerializeField] private int maxEntries = 50; 
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     //Cargar leaderboard 
     public List<LeaderboardEntry> LoadLeaderboard()

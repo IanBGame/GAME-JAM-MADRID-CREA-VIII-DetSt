@@ -29,7 +29,6 @@ public class rondaRuletaManager : MonoBehaviour
 
     [SerializeField] GameObject roulette;
 
-    [SerializeField] private TextMeshProUGUI textoPuntos;
     private GameManager gameManager;
 
     private void Start()
@@ -44,10 +43,6 @@ public class rondaRuletaManager : MonoBehaviour
 
     private void Update()
     {
-        if (textoPuntos != null)
-        {
-            textoPuntos.text = Mathf.Ceil(gameManager.ruletaScore).ToString();
-        }
 
         if (canSpin)
         {
@@ -150,6 +145,7 @@ public class rondaRuletaManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         gameManager.GetRuletaScore();
+        gameManager.ResetTempScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

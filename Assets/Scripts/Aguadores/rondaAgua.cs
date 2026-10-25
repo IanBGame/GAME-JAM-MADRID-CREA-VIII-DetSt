@@ -33,7 +33,6 @@ public class CanvasManager : MonoBehaviour
 
     [Header("Interfaz (UI)")]
     [SerializeField] private TextMeshProUGUI textoTemporizador; 
-    [SerializeField] private TextMeshProUGUI textoPuntos;
 
     [Header("Configuración de Tiempo")]
     [SerializeField] private float duracionRonda = 30f; 
@@ -192,11 +191,6 @@ public class CanvasManager : MonoBehaviour
                 textoTemporizador.text = Mathf.Ceil(tiempoRestante).ToString() + "s";
             }
 
-            if (textoPuntos != null)
-            {
-                textoPuntos.text = Mathf.Ceil(gameManager.aguadorScore).ToString();
-            }
-
             if (tiempoRestante <= 0)
             {
                 TiempoAgotado();
@@ -250,6 +244,8 @@ public class CanvasManager : MonoBehaviour
         personajeActivoParaFrente = false;
         Debug.LogWarning("¡TIEMPO AGOTADO! Se acabó la ronda.");
         Ocultar();
+        gameManager.GetAguadorScore();
+        gameManager.ResetTempScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -319,7 +315,7 @@ public class CanvasManager : MonoBehaviour
 
     private System.Collections.IEnumerator RutinaCastigoFallo(float tiempoCastigo)
     {
-        gameManager.SubtractScoreBig();
+        gameManager.SubtractScore();
         estaCastigado = true;
         yield return new WaitForSeconds(tiempoCastigo);
         indiceActual = 0;

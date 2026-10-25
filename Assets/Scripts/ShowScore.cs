@@ -23,10 +23,11 @@ public class ShowScore : MonoBehaviour
 
     private void SetScores()
     {
-        aplastarScore = gameManager.GetAplastarScore();
-        panueloScore = gameManager.GetPanueloScore();
-        ruletaScore = gameManager.GetRuletaScore();
-        aguadorScore = gameManager.GetAguadorScore();
+        gameManager.GetTotalScore();
+        aplastarScore = gameManager.aplastarScore;
+        panueloScore = gameManager.panueloScore;
+        ruletaScore = gameManager.ruletaScore;
+        aguadorScore = gameManager.aguadorScore;
         total = gameManager.totalScore;
     }
 

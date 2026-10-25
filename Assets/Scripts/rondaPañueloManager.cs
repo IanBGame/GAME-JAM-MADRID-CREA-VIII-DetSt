@@ -27,8 +27,8 @@ public class rondaPañueloManager : MonoBehaviour
 
     public bool isInRound;
 
-    [SerializeField] private float minTimer = 2f;
-    [SerializeField] private float maxTimer = 5f;
+    [SerializeField] private float minTimer = 1f;
+    [SerializeField] private float maxTimer = 4f;
 
     [SerializeField] private float roundDuration = 30f;
 
@@ -205,6 +205,7 @@ public class rondaPañueloManager : MonoBehaviour
         SetLetterText();
 
         gameManager.GetPanueloScore();
+        gameManager.ResetTempScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
